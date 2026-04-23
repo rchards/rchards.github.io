@@ -7,17 +7,29 @@ description: >
   Design Principles. Target: WCAG 2.2 Level AA. Built on GOV.UK Frontend.
 
 colors:
-  # Brand
-  brand: "#1d70b8"
+  # Core palette — flat hex primitives. Semantic roles are described in the
+  # Colors prose below and bound to components in the components section.
+  primary: "#1d70b8"            # GOV.UK blue (brand, links)
+  on-primary: "#ffffff"
+  secondary: "#00703c"          # green — primary action
+  on-secondary: "#ffffff"
+  tertiary: "#d4351c"           # red — warning/destructive/error
+  on-tertiary: "#ffffff"
+  neutral: "#ffffff"            # page background
+  on-neutral: "#0b0c0c"         # body text
+  surface: "#ffffff"
+  on-surface: "#0b0c0c"
+  surface-variant: "#f3f2f1"    # inset, footer, secondary button bg
+  on-surface-variant: "#0b0c0c"
+  error: "#d4351c"
+  on-error: "#ffffff"
 
-  # Neutrals
+  # Named palette — the complete GOV.UK colour set, referenced throughout.
   black: "#0b0c0c"
   white: "#ffffff"
   dark-grey: "#505a5f"
   mid-grey: "#b1b4b6"
   light-grey: "#f3f2f1"
-
-  # Action
   blue: "#1d70b8"
   dark-blue: "#003078"
   light-blue: "#5694ca"
@@ -34,21 +46,9 @@ colors:
   brown: "#b58840"
   turquoise: "#28a197"
 
-  # Semantic roles
-  page-background: "{colors.white}"
-  text-primary: "{colors.black}"
-  text-secondary: "{colors.dark-grey}"
-  link: "{colors.blue}"
-  link-hover: "{colors.dark-blue}"
-  link-visited: "{colors.purple}"
-  link-active: "{colors.black}"
-  border: "{colors.mid-grey}"
-  input-border: "{colors.black}"
-  inset-background: "{colors.light-grey}"
-  error: "{colors.red}"
-  success: "{colors.green}"
-  focus-background: "{colors.yellow}"
-  focus-text: "{colors.black}"
+  # Focus state
+  focus: "#ffdd00"
+  on-focus: "#0b0c0c"
 
 typography:
   # The normative typeface is GDS Transport on service.gov.uk subdomains.
@@ -112,27 +112,36 @@ spacing:
   "9": 40px     # responsive → 60px at ≥ 640px
 
 components:
-  # Primary action
+  # Buttons
   button-primary:
     backgroundColor: "{colors.green}"
     textColor: "{colors.white}"
     typography: "{typography.body}"
     rounded: "{rounded.none}"
-    padding: "8px 10px 7px"
+    padding: "{spacing.2}"
     height: 44px
+  button-primary-hover:
+    backgroundColor: "#005a30"
+    textColor: "{colors.white}"
+  button-primary-focus:
+    backgroundColor: "{colors.yellow}"
+    textColor: "{colors.black}"
   button-secondary:
     backgroundColor: "{colors.light-grey}"
     textColor: "{colors.black}"
     typography: "{typography.body}"
     rounded: "{rounded.none}"
-    padding: "8px 10px 7px"
+    padding: "{spacing.2}"
     height: 44px
+  button-secondary-hover:
+    backgroundColor: "{colors.mid-grey}"
+    textColor: "{colors.black}"
   button-warning:
     backgroundColor: "{colors.red}"
     textColor: "{colors.white}"
     typography: "{typography.body}"
     rounded: "{rounded.none}"
-    padding: "8px 10px 7px"
+    padding: "{spacing.2}"
     height: 44px
 
   # Inputs
@@ -141,25 +150,31 @@ components:
     textColor: "{colors.black}"
     typography: "{typography.body}"
     rounded: "{rounded.none}"
-    padding: "5px 4px 4px"
+    padding: "{spacing.1}"
     height: 40px
+  input-text-focus:
+    backgroundColor: "{colors.yellow}"
+    textColor: "{colors.black}"
+  input-text-error:
+    backgroundColor: "{colors.white}"
+    textColor: "{colors.black}"
   textarea:
     backgroundColor: "{colors.white}"
     textColor: "{colors.black}"
     typography: "{typography.body}"
     rounded: "{rounded.none}"
-    padding: "5px"
+    padding: "{spacing.1}"
 
-  # Structural
+  # Structural / content
   inset-text:
     backgroundColor: "{colors.white}"
-    textColor: "{colors.text-primary}"
+    textColor: "{colors.black}"
     typography: "{typography.body}"
     rounded: "{rounded.none}"
-    padding: "15px 15px 15px 20px"
+    padding: "{spacing.3}"
   warning-text:
     backgroundColor: "{colors.white}"
-    textColor: "{colors.text-primary}"
+    textColor: "{colors.black}"
     typography: "{typography.body}"
     rounded: "{rounded.none}"
   panel-confirmation:
@@ -167,36 +182,51 @@ components:
     textColor: "{colors.white}"
     typography: "{typography.heading-l}"
     rounded: "{rounded.none}"
-    padding: "35px"
+    padding: "{spacing.7}"
   tag:
     backgroundColor: "{colors.blue}"
     textColor: "{colors.white}"
     typography: "{typography.body-s}"
     rounded: "{rounded.none}"
-    padding: "2px 8px 0 8px"
+    padding: "{spacing.1}"
   error-message:
+    backgroundColor: "{colors.white}"
     textColor: "{colors.red}"
     typography: "{typography.body}"
   error-summary:
     backgroundColor: "{colors.white}"
     textColor: "{colors.red}"
     rounded: "{rounded.none}"
-    padding: "15px"
+    padding: "{spacing.3}"
+
+  # Chrome
   header:
     backgroundColor: "{colors.black}"
     textColor: "{colors.white}"
+    padding: "{spacing.2}"
   footer:
     backgroundColor: "{colors.light-grey}"
-    textColor: "{colors.text-primary}"
+    textColor: "{colors.black}"
+    padding: "{spacing.6}"
   phase-banner:
     backgroundColor: "{colors.white}"
-    textColor: "{colors.text-primary}"
+    textColor: "{colors.black}"
+    padding: "{spacing.2}"
+
+  # Notifications
   notification-banner-default:
     backgroundColor: "{colors.blue}"
     textColor: "{colors.white}"
+    padding: "{spacing.3}"
   notification-banner-success:
     backgroundColor: "{colors.green}"
     textColor: "{colors.white}"
+    padding: "{spacing.3}"
+
+  # Universal focus state — applies to every interactive element
+  focus-state:
+    backgroundColor: "{colors.yellow}"
+    textColor: "{colors.black}"
 ---
 
 ## Overview
@@ -224,11 +254,11 @@ When in doubt, justify an element against principle 2 ("Do less") and principle 
 
 ## Colors
 
-- **Text** is `{colors.text-primary}` on `{colors.page-background}`. Secondary text is `{colors.text-secondary}`. Never use grey on grey.
-- **Links** are `{colors.link}`, underlined; `{colors.link-hover}` on hover; `{colors.link-visited}` after visit (content links only, not nav or buttons); `{colors.link-active}` while pressed.
+- **Text** is `{colors.black}` on `{colors.white}`. Secondary text is `{colors.dark-grey}`. Never use grey on grey.
+- **Links** are `{colors.blue}`, underlined; `{colors.dark-blue}` on hover; `{colors.purple}` after visit (content links only, not nav or buttons); `{colors.black}` while pressed.
 - **Primary action** uses `{colors.green}`. Warning/destructive action uses `{colors.red}`. Secondary action uses `{colors.light-grey}` on black text.
-- **Errors** are `{colors.error}`. Error state carries text, icon position, and border — never colour alone.
-- **Focus** is `{colors.focus-background}` fill with `{colors.focus-text}` underline. Every interactive element has a visible focus state. Never remove outlines.
+- **Errors** are `{colors.red}`. Error state carries text, icon position, and border — never colour alone.
+- **Focus** is `{colors.yellow}` fill with `{colors.black}` underline. Every interactive element has a visible focus state. Never remove outlines.
 - **Contrast** meets WCAG 2.2 AA: 4.5:1 for body text, 3:1 for large text and UI components. When in doubt, increase contrast.
 - **Do not** introduce new brand colours. The palette above is the whole palette.
 
