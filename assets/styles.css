@@ -1,0 +1,167 @@
+/* Interesting toys — minimal accessible stylesheet.
+   Follows the principles in /design.md:
+   - Semantic HTML, high contrast, visible focus state
+   - Works without JS, reflows at 400% zoom, respects reduced motion
+   - No web fonts, no third-party requests
+*/
+
+*, *::before, *::after { box-sizing: border-box; }
+
+:root {
+  --bg: #ffffff;
+  --text: #0b0c0c;
+  --text-muted: #505a5f;
+  --link: #1d70b8;
+  --link-hover: #003078;
+  --link-visited: #4c2c92;
+  --border: #b1b4b6;
+  --surface: #f3f2f1;
+  --focus-bg: #ffdd00;
+  --focus-text: #0b0c0c;
+  --max-width: 44rem;
+}
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 1.125rem;
+  line-height: 1.5;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+/* Skip link */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  padding: 0.75rem 1rem;
+  background: var(--focus-bg);
+  color: var(--focus-text);
+  text-decoration: underline;
+  font-weight: 700;
+}
+.skip-link:focus {
+  left: 0;
+  z-index: 100;
+  outline: 3px solid var(--focus-text);
+}
+
+/* Header */
+.site-header {
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 0;
+  margin-bottom: 2.5rem;
+}
+.site-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+}
+.site-title a {
+  color: var(--text);
+  text-decoration: none;
+}
+.site-title a:hover { text-decoration: underline; }
+
+/* Headings */
+h1 {
+  font-size: 2.25rem;
+  line-height: 1.15;
+  margin: 0 0 0.75rem;
+  font-weight: 700;
+}
+.lede {
+  font-size: 1.25rem;
+  color: var(--text-muted);
+  margin: 0 0 2.5rem;
+}
+
+/* Toys list */
+.toys {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.toy {
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--border);
+}
+.toy:last-child { border-bottom: 1px solid var(--border); }
+
+.toy-title {
+  font-size: 1.375rem;
+  line-height: 1.25;
+  margin: 0 0 0.5rem;
+  font-weight: 700;
+}
+.toy-meta {
+  margin: 0 0 0.75rem;
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+.toy-summary {
+  margin: 0 0 0.75rem;
+  max-width: 38rem;
+}
+.toy-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.25rem;
+  font-size: 1rem;
+}
+.toy-links li { margin: 0; }
+
+/* Links */
+a {
+  color: var(--link);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+a:hover { color: var(--link-hover); }
+a:visited { color: var(--link-visited); }
+a:focus {
+  outline: 3px solid var(--focus-bg);
+  outline-offset: 0;
+  background: var(--focus-bg);
+  color: var(--focus-text);
+  text-decoration: none;
+  box-shadow: 0 -2px var(--focus-bg), 0 4px var(--focus-text);
+}
+
+/* Footer */
+.site-footer {
+  margin-top: 4rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+.site-footer p { margin: 0; }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Small screens */
+@media (max-width: 30rem) {
+  body { font-size: 1rem; }
+  h1 { font-size: 1.75rem; }
+  .lede { font-size: 1.125rem; margin-bottom: 2rem; }
+}

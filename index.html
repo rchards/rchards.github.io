@@ -1,7 +1,78 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Interesting toys</title>
+  <meta name="description" content="A small collection of specs, prototypes, and experiments.">
+  <meta name="theme-color" content="#0b0c0c">
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <header class="site-header" role="banner">
+    <div class="container">
+      <p class="site-title"><a href="/">Interesting toys</a></p>
+    </div>
+  </header>
+
+  <main id="main" class="container" role="main">
+    <h1>Interesting toys</h1>
+    <p class="lede">A small, growing collection of specs, prototypes, and things I've been playing with.</p>
+
+    <!--
+      TOYS LIST
+      =========
+      To add a new toy, copy the <li class="toy"> template below and insert it
+      between the TOYS:START and TOYS:END markers, newest first.
+
+      Template:
+
+      <li class="toy">
+        <h2 class="toy-title"><a href="{primary link}">{title}</a></h2>
+        <p class="toy-meta">
+          <time datetime="{YYYY-MM-DD}">{human date}</time>
+          <span aria-hidden="true"> · </span>
+          <span class="toy-kind">{kind, e.g. Spec / Prototype / Note}</span>
+        </p>
+        <p class="toy-summary">{one-sentence description}</p>
+        <ul class="toy-links">
+          <li><a href="{link}">{label}</a></li>
+          ...
+        </ul>
+      </li>
+
+      If a toy needs its own page (prototype, demo, assets), put it under
+      /toys/<slug>/ and link to /toys/<slug>/ as the primary link.
+    -->
+    <ul class="toys">
+      <!-- TOYS:START -->
+      <li class="toy">
+        <h2 class="toy-title">
+          <a href="https://github.com/rchards/rchards.github.io/blob/master/design.md">design.md — a GOV.UK-compliant DESIGN.md</a>
+        </h2>
+        <p class="toy-meta">
+          <time datetime="2026-04-23">23 April 2026</time>
+          <span aria-hidden="true"> · </span>
+          <span class="toy-kind">Spec</span>
+        </p>
+        <p class="toy-summary">
+          A Stitch-compatible <a href="https://github.com/google-labs-code/design.md">DESIGN.md</a> that encodes the <a href="https://design-system.service.gov.uk/">GOV.UK Design System</a> as constraints for AI UI-generation tools. Drop it into a Stitch project (or pass it to Claude / Cursor / v0) to get WCAG 2.2 AA, GOV.UK-styled output.
+        </p>
+        <ul class="toy-links">
+          <li><a href="https://github.com/rchards/rchards.github.io/blob/master/design.md">View on GitHub</a></li>
+          <li><a href="https://raw.githubusercontent.com/rchards/rchards.github.io/master/design.md">Raw file (for AI tools)</a></li>
+        </ul>
+      </li>
+      <!-- TOYS:END -->
+    </ul>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <p>Source on <a href="https://github.com/rchards/rchards.github.io">GitHub</a>.</p>
+    </div>
+  </footer>
 </body>
 </html>
